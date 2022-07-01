@@ -1,0 +1,59 @@
+----- menampilkan semua data pada 1 tabel
+MariaDB [data_sampel]> select * from agents;
+
+-----WHERE
+MariaDB [data_sampel]> select agent_name,commission from agents where working_area='London';
+
+-----LIKE 
+MariaDB [tugas]> select agent_name
+    -> from agents
+    -> where agent_name like 'A%';
+
+-----LIMIT
+MariaDB [data_sampel]> SELECT * FROM agents LIMIT 5;
+
+-----OR
+MariaDB [tugas]> select working_area,agent_code
+    -> from agents
+    -> where working_area = 'London' or
+    -> working_area = 'Bangalore';
+
+-----BETWEEN
+MariaDB [tugas]> select * from agents
+    -> where agent_code
+    -> between 'A004' and 'A009';
+
+-----INNER JOIN
+MariaDB [tugas]> select g.agent_code,g.agent_name,cust_name
+    -> from agents g
+    -> inner join customer c
+    -> on g.agent_code = c.agent_code;
+
+-----LEFT JOIN
+MariaDB [tugas]> select c.cust_name, c.cust_city, agent_name
+    -> from customer c
+    -> left join agents g
+    -> on c.agent_code = g.agent_code;
+
+-----RIGHT JOIN
+MariaDB [tugas]> select g.agent_name, g.working_area, cust_name
+    -> from agents g
+    -> right join customer c
+    -> on g.agent_code = c.agent_code;
+
+-----GROUP BY
+MariaDB [tugas]> select agent_code, agent_name
+    -> from agents
+    -> group by agent_code;
+
+-----SUB QUERY
+MariaDB [tugas]> select agent_name, agent_code
+    -> from agents
+    -> where
+    -> agent_code =(
+    -> select max(agent_code)
+    -> from agents);
+
+
+
+
